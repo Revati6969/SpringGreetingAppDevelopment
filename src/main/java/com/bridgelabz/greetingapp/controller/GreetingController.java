@@ -1,16 +1,24 @@
 package com.bridgelabz.greetingapp.controller;
 
-import com.bridgelabz.greetingapp.model.Greeting;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.bridgelabz.greetingapp.dto.Greeting;
+import com.bridgelabz.greetingapp.dto.User;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
     @GetMapping("/getGreeting")
+    public Greeting greeting(@RequestParam(value = "name", defaultValue = "world") String name) {
+        return new Greeting(name);
+    }
+
+    @RequestMapping(value = "/query", method = RequestMethod.GET)
     public Greeting getGreeting(@RequestParam(value = "name", defaultValue = "world") String name) {
         return new Greeting(name);
+    }
+
+    @RequestMapping("/post")
+    public Greeting postGreeting(@RequestBody User user) {
+        return new Greeting(user.getFirstName() + " " + user.getLastName());
     }
 }
