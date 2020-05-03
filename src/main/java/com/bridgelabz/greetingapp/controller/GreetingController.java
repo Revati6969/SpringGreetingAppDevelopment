@@ -1,6 +1,7 @@
 package com.bridgelabz.greetingapp.controller;
 
 import com.bridgelabz.greetingapp.dto.UserDTO;
+import com.bridgelabz.greetingapp.exception.GreetingAppException;
 import com.bridgelabz.greetingapp.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,10 @@ public class GreetingController {
     @PostMapping("/create")
     public UserDTO saveGreeting(@RequestBody UserDTO greetingDTO) {
         return greetingService.saveGreeting(greetingDTO);
+    }
+
+    @GetMapping("/greetings/{id}")
+    public UserDTO getGreetingById(@PathVariable Long id) throws GreetingAppException {
+        return greetingService.getGreetingByID(id);
     }
 }
