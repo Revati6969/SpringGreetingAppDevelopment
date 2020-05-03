@@ -1,6 +1,7 @@
 package com.bridgelabz.greetingapp.service;
 
 import com.bridgelabz.greetingapp.dto.UserDTO;
+import com.bridgelabz.greetingapp.exception.GreetingAppException;
 import com.bridgelabz.greetingapp.model.Greeting;
 import com.bridgelabz.greetingapp.repository.GreetingRepository;
 import org.modelmapper.ModelMapper;
@@ -33,6 +34,14 @@ public class GreetingService {
         greetingRepository.save(greeting);
         greetingDTO.setId(greeting.getId());
         return greetingDTO;
+    }
+
+    public UserDTO getGreetingByID(Long id) throws GreetingAppException {
+        Greeting greeting = greetingRepository.getOne(id);
+        if (greeting == null)
+            throw new GreetingAppException(GreetingAppException.ExceptionType.DATA_NOT_FOUND,"DATA NOT FOUND");
+        UserDTO userDTO = modelMapper.map(greeting, UserDTO.class);
+        return userDTO;
     }
 
 }
