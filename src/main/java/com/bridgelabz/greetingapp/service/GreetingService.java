@@ -50,4 +50,11 @@ public class GreetingService {
         return greetingRepository.findAll();
     }
 
+    public String deleteGreeting(Long id) {
+        greetingRepository.deleteById(id);
+        return "Greeting id: " + id + " get deleted..";
+    }
+
+
+
 }
