@@ -3,6 +3,7 @@ package com.bridgelabz.greetingapp.model;
 import javax.persistence.*;
 
 @Entity
+@Table
 public class Greeting {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
